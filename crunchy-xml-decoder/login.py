@@ -22,10 +22,9 @@ def getuserstatus(session=''):
     if re.search(re.escape('      ga(\'set\', \'dimension5\', \'registered\');'), site):
         status = 'Free Member'
     elif re.search(re.escape('      ga(\'set\', \'dimension6\', \'premium\');'), site):
-        if re.search(re.escape('      ga(\'set\', \'dimension6\', \'premiumplus\');'), site):
-            status = 'Premium+ Member'
-        else:
-            status = 'Premium Member'
+        status = 'Premium Member'
+    elif re.search(re.escape('      ga(\'set\', \'dimension6\', \'premiumplus\');'), site):
+        status = 'Premium+ Member'
     if status != 'Guest':
         user1 = re.findall('<a href=\"/user/(.+)\" ', site).pop()
     return [status,user1]
