@@ -47,7 +47,7 @@ def login(username, password):
                'login_form[_token]': token}
 
     res_post = session.post('https://www.crunchyroll.com/login', data=payload, headers=headers, allow_redirects = False)
-    if res_post.status_code != 302:
+    if not (res_post.status_code == 302 or (res_post.status_code == 200 and username == '')):
       print 'Login failed'
       sys.exit()
 
